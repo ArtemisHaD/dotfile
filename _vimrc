@@ -155,6 +155,20 @@ NeoBundleFetch 'Shougo/neobundle.vim'
  
 " 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
 
+NeoBundle 'tpope/vim-fugitive'
+
+" ログファイルを色づけしてくれる
+NeoBundle 'vim-scripts/AnsiEsc.vim'
+
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
+
+" コメントON/OFFを手軽に実行
+NeoBundle 'tomtom/tcomment_vim'
+
 NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 NeoBundle 'vim-scripts/vim-auto-save'
@@ -173,6 +187,10 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'grep.vim'
 "NeoBundle 'drillbits/nyan-modoki.vim'
 NeoBundle 'basyura/TweetVim'
+nnoremap ,ts :<C-u>TweetVimSay<CR>
+nnoremap ,tc :<C-u>TweetVimCommandSay
+nnoremap ,tl :<C-u>TweetVimCurrentLineSay<CR>
+
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'tyru/open-browser.vim'
 
@@ -186,6 +204,33 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+
+" if_luaが有効ならneocompleteを使う
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+
+if neobundle#is_installed('neocomplete')
+    " neocomplete用設定
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_ignore_case = 1
+    let g:neocomplete#enable_smart_case = 1
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns._ = '\h\w*'
+elseif neobundle#is_installed('neocomplcache')
+    " neocomplcache用設定
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_ignore_case = 1
+    let g:neocomplcache_enable_smart_case = 1
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+endif
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 call neobundle#end()
  
@@ -245,5 +290,4 @@ let g:Tex_IgnoredWarnings =
     \"Citation %.%# undefined\n".
     \"LaTeX Font Warning: Font shape `%s' undefined\n".
     \"LaTeX Font Warning: Some font shapes were not available, defaults substituted."
-"
-"
+
