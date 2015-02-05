@@ -44,7 +44,8 @@ inoremap <C-U> <C-G>u<C-U>
 
 noremap <CR> o<ESC>
 
-
+nnoremap ; :
+nnoremap : ;
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -206,7 +207,7 @@ nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 
 " if_luaが有効ならneocompleteを使う
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+" NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 
 if neobundle#is_installed('neocomplete')
     " neocomplete用設定
@@ -290,4 +291,3 @@ let g:Tex_IgnoredWarnings =
     \"Citation %.%# undefined\n".
     \"LaTeX Font Warning: Font shape `%s' undefined\n".
     \"LaTeX Font Warning: Some font shapes were not available, defaults substituted."
-
